@@ -1,22 +1,16 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	inject,
-	signal,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {ChangeDetectionStrategy, Component, inject, signal,} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {
 	ChatMessageComponent,
+	GptMessageOrthographyComponent,
 	MyMessageComponent,
 	TextMessageBoxComponent,
-	TextMessageBoxEvent,
 	TextMessageBoxFileComponent,
 	TextMessageBoxSelectComponent,
-	TextMessageEvent,
 	TypingLoaderComponent,
 } from '@components/index';
-import { MessageInterface } from '@interfaces/message.interface';
-import { OpenAiService } from '@services/openai.service';
+import {MessageInterface} from '@interfaces/message.interface';
+import {OpenAiService} from '@services/openai.service';
 
 @Component({
 	selector: 'app-orthography-page',
@@ -25,6 +19,7 @@ import { OpenAiService } from '@services/openai.service';
 		CommonModule,
 
 		ChatMessageComponent,
+		GptMessageOrthographyComponent,
 		MyMessageComponent,
 
 		TypingLoaderComponent,
@@ -37,23 +32,34 @@ import { OpenAiService } from '@services/openai.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrthographyPageComponent {
-	public messages = signal<MessageInterface[]>([
-		{ text: 'Hola mundo Signal', isGpt: true },
-	]);
+	public messages = signal<MessageInterface[]>([]);
 
 	public isLoading = signal(false);
 
 	public openAiService = inject(OpenAiService);
 
 	handleMessage(prompt: string) {
-		console.log(prompt);
-	}
+		this.isLoading.set(true)
 
-	handleMessageWithFile({ prompt, file }: TextMessageEvent) {
-		console.log({ prompt, file });
-	}
+		this.messages.update((prev) => [
+			...prev,
+			{
+				isGpt: false,
+				text: prompt
+			}
+		])
 
-	handleMessageWithSelect(event: TextMessageBoxEvent) {
-		console.log(event);
+		this.openAiService.checkOrthography(prompt).subscribe(resp => {
+			this.isLoading.set(false)
+
+			this.messages.update(prev => [
+				...prev,
+				{
+					isGpt: true,
+					text: resp.message,
+					info: resp
+				}
+			])
+		})
 	}
 }
