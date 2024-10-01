@@ -1,13 +1,6 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	EventEmitter,
-	inject,
-	Input,
-	Output,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output,} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({
 	selector: 'app-text-message-box',
@@ -31,8 +24,7 @@ export class TextMessageBoxComponent {
 	handleSubmit() {
 		if (this.form.invalid) return;
 
-		const { prompt } = this.form.value;
-		console.log({ prompt });
+		const {prompt} = this.form.value;
 
 		this.onMessage.emit(prompt ?? '');
 
