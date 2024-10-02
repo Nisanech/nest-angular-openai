@@ -24,23 +24,41 @@ export class ProsConsStreamPageComponent {
 
 	public openAiService = inject(OpenAiService);
 
+	public abortSignal = new AbortController()
+
 	async handleMessage(prompt: string) {
+		this.abortSignal.abort()
+
+		this.abortSignal = new AbortController()
+
 		this.messages.update(prev => [
 			...prev,
 			{
 				isGpt: false,
 				text: prompt
+			},
+			{
+				isGpt: true,
+				text: '...'
 			}
 		])
-		
+
 		this.isLoading.set(true)
 
-		const stream = this.openAiService.prosConsStreamDiscusser(prompt)
+		const stream = this.openAiService.prosConsStreamDiscusser(prompt, this.abortSignal.signal)
 
 		this.isLoading.set(false)
 
 		for await (const text of stream) {
-			console.log('text ->', text);
+			this.handleStreamResponse(text)
 		}
+	}
+
+	handleStreamResponse(message: string) {
+		this.messages().pop()
+
+		const messages = this.messages()
+
+		this.messages.set([...messages, {isGpt: true, text: message}])
 	}
 }
