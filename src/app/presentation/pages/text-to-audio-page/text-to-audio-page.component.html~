@@ -6,7 +6,7 @@
 
 			@for (message of messages(); track $index) {
 				@if (message.isGpt) {
-					<app-chat-message [text]="message.text" [audioUrl]="message.audioUrl"/>
+					<app-chat-message [text]="message.text"/>
 				} @else {
 					<app-my-message [text]="message.text"/>
 				}

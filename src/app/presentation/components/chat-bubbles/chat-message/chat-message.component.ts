@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MarkdownModule} from "ngx-markdown";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
 	selector: 'app-chat-message',
@@ -10,5 +10,6 @@ import {MarkdownModule} from "ngx-markdown";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatMessageComponent {
-	@Input({required: true}) text!: string;
+	@Input({ required: true }) text!: string;
+	@Input() audioUrl?: string;
 }
