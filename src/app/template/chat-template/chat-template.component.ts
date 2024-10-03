@@ -1,14 +1,18 @@
 import {Component, inject, signal} from '@angular/core';
-import {ChatMessageComponent} from '@components/chat-bubbles/chat-message/chat-message.component';
-import {MyMessageComponent} from '@components/chat-bubbles/my-message/my-message.component';
+
 import {
+	ChatMessageComponent,
+	MyMessageComponent,
 	TextMessageBoxEvent,
 	TextMessageBoxSelectComponent,
-} from '@components/text-boxes/text-message-box-select/text-message-box-select.component';
-import {TypingLoaderComponent} from '@components/typing-loader/typing-loader.component';
-import {MessageInterface} from '@interfaces/message.interface';
-import {OpenAiService} from '@services/openai.service';
-import {TextMessageEvent} from '@components/text-boxes/text-message-box-file/text-message-box-file.component';
+	TextMessageEvent,
+	TypingLoaderComponent
+} from '@components/index';
+
+
+import {MessageInterface} from '@interfaces/index';
+import {OpenAiService} from '@services/index';
+
 
 @Component({
 	selector: 'app-chat-template',

@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject, signal,} from '@angular/core';
 import {CommonModule} from '@angular/common';
+
 import {
 	ChatMessageComponent,
 	GptMessageOrthographyComponent,
@@ -9,8 +10,10 @@ import {
 	TextMessageBoxSelectComponent,
 	TypingLoaderComponent,
 } from '@components/index';
-import {MessageInterface} from '@interfaces/message.interface';
-import {OpenAiService} from '@services/openai.service';
+
+import {MessageInterface} from '@interfaces/index';
+
+import {OpenAiService} from '@services/index';
 
 @Component({
 	selector: 'app-orthography-page',

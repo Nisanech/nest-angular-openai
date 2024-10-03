@@ -1,10 +1,14 @@
 import {Component, inject, signal} from '@angular/core';
-import {ChatMessageComponent} from "@components/chat-bubbles/chat-message/chat-message.component";
-import {MyMessageComponent} from "@components/chat-bubbles/my-message/my-message.component";
-import {TypingLoaderComponent} from "@components/typing-loader/typing-loader.component";
-import {MessageInterface} from "@interfaces/message.interface";
-import {OpenAiService} from "@services/openai.service";
-import {TextMessageBoxComponent} from "@components/text-boxes/text-message-box/text-message-box.component";
+
+import {
+	ChatMessageComponent,
+	MyMessageComponent,
+	TextMessageBoxComponent,
+	TypingLoaderComponent
+} from "@components/index"
+
+import {MessageInterface} from "@interfaces/index";
+import {OpenAiService} from "@services/index";
 
 @Component({
 	selector: 'app-pros-cons-stream-page',
