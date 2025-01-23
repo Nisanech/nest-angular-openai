@@ -1,20 +1,28 @@
-import { Component, inject, signal } from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 
 import {
 	ChatMessageComponent,
 	MyMessageComponent,
 	TextMessageBoxEvent,
+	TextMessageBoxSelectComponent,
 	TextMessageEvent,
-	TypingLoaderComponent,
+	TypingLoaderComponent
 } from '@components/index';
 
-import { MessageInterface } from '@interfaces/index';
-import { OpenAiService } from '@services/index';
+
+import {MessageInterface} from '@interfaces/index';
+import {OpenAiService} from '@services/index';
+
 
 @Component({
 	selector: 'app-chat-template',
 	standalone: true,
-	imports: [ChatMessageComponent, MyMessageComponent, TypingLoaderComponent],
+	imports: [
+		ChatMessageComponent,
+		MyMessageComponent,
+		TextMessageBoxSelectComponent,
+		TypingLoaderComponent,
+	],
 	templateUrl: './chat-template.component.html',
 })
 export class ChatTemplateComponent {
@@ -28,11 +36,12 @@ export class ChatTemplateComponent {
 		console.log(prompt);
 	}
 
-	handleMessageWithFile({ prompt, file }: TextMessageEvent) {
-		console.log({ prompt, file });
+	handleMessageWithFile({prompt, file}: TextMessageEvent) {
+		console.log({prompt, file});
 	}
 
 	handleMessageWithSelect(event: TextMessageBoxEvent) {
 		console.log(event);
 	}
 }
+

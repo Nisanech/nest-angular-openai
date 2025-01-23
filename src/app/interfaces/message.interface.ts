@@ -8,4 +8,8 @@ export interface MessageInterface {
 		ok: boolean;
 	};
 	audioUrl?: string;
+	imageInfo?: {
+		url: string;
+		alt: string;
+	};
 }
